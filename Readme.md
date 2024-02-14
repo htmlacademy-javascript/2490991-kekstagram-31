@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Олег Харитонов](https://up.htmlacademy.ru/javascript/31/user/2490991).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Беллавин](https://htmlacademy.ru/profile/bellavin).
 
 ---
 
