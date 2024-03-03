@@ -7,6 +7,10 @@ const createRandomIdGenerator = (min, max) => {
   return function () {
     let currentId = getRandomInt(min, max);
 
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+
     while (previousValues.includes(currentId)) {
       currentId = getRandomInt(min, max);
     }

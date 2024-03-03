@@ -82,14 +82,16 @@ const descriptions = [
   'Бегемоты ваши друзья',
 ];
 
-const getRandomMessage = () => {
-  const generateMessageId = createRandomIdGenerator(DEFAULT_NUMBER, messages.length - 1);
-  return messages[generateMessageId()];
-};
+const generatePhotoId = createRandomIdGenerator(
+  PHOTO_NUMBERS.min,
+  PHOTO_NUMBERS.max
+);
+const generateCommentId = createRandomIdGenerator(COMMENT_ID_NUMBERS.min, COMMENT_ID_NUMBERS.max);
+
+const getRandomMessage = () => messages[getRandomInt(DEFAULT_NUMBER, messages.length - 1)];
 
 const createComment = () => {
   const num = getRandomInt(1, 6);
-  const generateCommentId = createRandomIdGenerator(COMMENT_ID_NUMBERS.min, COMMENT_ID_NUMBERS.max);
   return {
     id: generateCommentId(),
     avatar: `img/avatar-${num}.svg`,
@@ -102,10 +104,6 @@ const createComment = () => {
 };
 
 const createPhoto = () => {
-  const generatePhotoId = createRandomIdGenerator(
-    PHOTO_NUMBERS.min,
-    PHOTO_NUMBERS.max
-  );
   const photoId = generatePhotoId();
   return {
     id: photoId,
