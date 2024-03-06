@@ -1,4 +1,4 @@
-import { openFullScreenModal } from './components/render-fullscreen.js';
+import { openFullScreenModal } from './render-fullscreen.js';
 
 const pictures = document.querySelector('.pictures');
 const template = document.querySelector('#picture').content;
