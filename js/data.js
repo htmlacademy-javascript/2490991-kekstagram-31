@@ -1,6 +1,6 @@
 import { getRandomInt, createRandomIdGenerator } from './utils.js';
 
-const PHOTO_COUNT = 25;
+const PHOTO_QTY = 25;
 const DEFAULT_NUMBER = 0;
 const COMMENT_ID_NUMBERS = {
   min: 0,
@@ -117,6 +117,6 @@ const createPhoto = () => {
   };
 };
 
-const createPhotos = () => Array.from({ length: PHOTO_COUNT }, createPhoto);
+const createPhotos = () => Array.from({ length: PHOTO_QTY }, createPhoto);
 
 export { createPhotos };
