@@ -22,8 +22,8 @@ const renderPhoto = (photos) => {
   pictures.appendChild(photoListFragment);
 
   pictures.addEventListener('click', (evt) => {
-    evt.preventDefault();
     if (evt.target.classList.contains('picture__img')) {
+      evt.preventDefault();
       const index = photos.findIndex(
         (el) => el.id === Number(evt.target.dataset.photoId)
       );
