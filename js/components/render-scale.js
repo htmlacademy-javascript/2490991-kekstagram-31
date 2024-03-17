@@ -38,23 +38,23 @@ noUiSlider.create(sliderEffectLevel, {
 const setScaleStyle = (effectiveValue, levelValue) => {
   switch (effectiveValue) {
     case 'chrome': {
-      image.style.filter = `grayscale(${levelValue})`;
+      image.style.setProperty('filter', `grayscale(${levelValue})`);
       break;
     }
     case 'sepia': {
-      image.style.filter = `sepia(${levelValue})`;
+      image.style.setProperty('filter', `sepia(${levelValue})`);
       break;
     }
     case 'marvin': {
-      image.style.filter = `invert(${levelValue}%)`;
+      image.style.setProperty('filter', `invert(${levelValue}%)`);
       break;
     }
     case 'phobos': {
-      image.style.filter = `blur(${levelValue}px)`;
+      image.style.setProperty('filter', `blur(${levelValue}px)`);
       break;
     }
     case 'heat': {
-      image.style.filter = `brightness(${levelValue})`;
+      image.style.setProperty('filter', `brightness(${levelValue})`);
       break;
     }
     default:

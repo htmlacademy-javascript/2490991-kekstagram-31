@@ -34,7 +34,7 @@ const changeSize = (isDecrease) => {
   }
 
   controlInput.value = `${value}%`;
-  preview.style.transform = `scale(${value / 100})`;
+  preview.style.setProperty('transform', `scale(${value / 100})`);
 };
 
 function closePreviewPicture() {
