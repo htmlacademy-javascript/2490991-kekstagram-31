@@ -1,7 +1,11 @@
 import { isEscapeKey } from '../utils';
 import { SIZE_NUMS } from '../constants.js';
 import './prestine-validate.js';
-import { changeEffects } from './render-scale.js';
+import {
+  changeEffects,
+  removeEffectClass,
+  removeScaleFilter,
+} from './render-scale.js';
 
 const body = document.body;
 const imgUpload = body.querySelector('.img-upload');
@@ -40,15 +44,19 @@ const changeSize = (isDecrease) => {
 function closePreviewPicture() {
   document.removeEventListener('keydown', onDocumentKeydown);
   body.querySelector('#upload-select-image').reset();
-  preview.removeAttribute('style');
-  image.removeAttribute('class');
+  preview.style.removeProperty('transform');
+  removeEffectClass();
+  removeScaleFilter();
   body.classList.remove('modal-open');
   overlay.classList.add('hidden');
 }
 
 const openLoadFile = (evt) => {
   const form = body.querySelector('.img-upload__form');
-  form.setAttribute('action', 'https://31.javascript.htmlacademy.pro/kekstagram');
+  form.setAttribute(
+    'action',
+    'https://31.javascript.htmlacademy.pro/kekstagram'
+  );
   form.setAttribute('method', 'POST');
   form.setAttribute('enctype', 'multipart/form-data');
   image.src = URL.createObjectURL(evt.target.files[0]);

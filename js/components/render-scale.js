@@ -35,6 +35,15 @@ noUiSlider.create(sliderEffectLevel, {
   },
 });
 
+const removeEffectClass = () => {
+  const effectClass = Object.values(SCALE_PHOTO).map((item) => item[0]);
+  effectClass.forEach((el) => image.classList.remove(el));
+};
+
+const removeScaleFilter = () => {
+  image.style.removeProperty('filter');
+};
+
 const setScaleStyle = (effectiveValue, levelValue) => {
   switch (effectiveValue) {
     case 'chrome': {
@@ -58,13 +67,13 @@ const setScaleStyle = (effectiveValue, levelValue) => {
       break;
     }
     default:
-      image.removeAttribute('style');
+      removeScaleFilter();
   }
 };
 
 const changeEffects = () => {
   const levelValue = overlay.querySelector('.effect-level__value');
-  image.removeAttribute('class');
+  removeEffectClass();
   const effectValue = fildsetEffects.querySelector(
     'input[name="effect"]:checked'
   ).value;
@@ -79,7 +88,7 @@ const changeEffects = () => {
       min: rangeMin,
       max: rangeMax,
     },
-    start: rangeMax,
+    start: rangeMin,
     step: effectStep,
   });
 
@@ -89,4 +98,4 @@ const changeEffects = () => {
   });
 };
 
-export { changeEffects };
+export { changeEffects, removeEffectClass, removeScaleFilter };
