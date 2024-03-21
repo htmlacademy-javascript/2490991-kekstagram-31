@@ -16,6 +16,19 @@ const imgScale = overlay.querySelector('.img-upload__scale');
 const fildsetEffects = overlay.querySelector('.img-upload__effects');
 const image = preview.querySelector('img');
 
+const closeModal = () => {
+  const successNode = body.querySelector('.success');
+  const errorNode = body.querySelector('.error');
+  if (successNode) {
+    successNode.remove();
+    closePreviewPicture();
+  } else if (errorNode) {
+    errorNode.remove();
+  } else {
+    closePreviewPicture();
+  }
+};
+
 const onDocumentKeydown = (evt) => {
   if (
     isEscapeKey(evt) &&
@@ -24,7 +37,18 @@ const onDocumentKeydown = (evt) => {
     )
   ) {
     evt.preventDefault();
-    closePreviewPicture();
+    closeModal();
+  }
+};
+
+const onOverlayClick = (evt) => {
+  if (
+    evt.target.classList.contains('img-upload__overlay') ||
+    evt.target.classList.contains('error') ||
+    evt.target.classList.contains('success')
+  ) {
+    evt.preventDefault();
+    closeModal();
   }
 };
 
@@ -43,7 +67,11 @@ const changeSize = (isDecrease) => {
 
 function closePreviewPicture() {
   document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('click', onOverlayClick);
   body.querySelector('#upload-select-image').reset();
+  overlay
+    .querySelectorAll('.img-upload__field-wrapper--error')
+    .forEach((el) => el.remove());
   preview.style.removeProperty('transform');
   removeEffectClass();
   removeScaleFilter();
@@ -63,6 +91,7 @@ const openLoadFile = (evt) => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('click', onOverlayClick);
 };
 
 imgScale.querySelector('.scale__control--smaller').onclick = () =>
@@ -77,4 +106,4 @@ reset.addEventListener('click', () => {
   closePreviewPicture();
 });
 
-export { openLoadFile };
+export { openLoadFile, closePreviewPicture };

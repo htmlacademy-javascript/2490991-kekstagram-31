@@ -42,6 +42,7 @@ const removeEffectClass = () => {
 
 const removeScaleFilter = () => {
   image.style.removeProperty('filter');
+  sliderEffectLevel.noUiSlider.reset();
 };
 
 const setScaleStyle = (effectiveValue, levelValue) => {
