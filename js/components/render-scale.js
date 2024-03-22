@@ -40,7 +40,7 @@ const removeEffectClass = () => {
   effectClass.forEach((el) => image.classList.remove(el));
 };
 
-const removeScaleFilter = () => {
+const resetScale = () => {
   image.style.removeProperty('filter');
   sliderEffectLevel.noUiSlider.reset();
 };
@@ -68,7 +68,7 @@ const setScaleStyle = (effectiveValue, levelValue) => {
       break;
     }
     default:
-      removeScaleFilter();
+      resetScale();
   }
 };
 
@@ -99,4 +99,4 @@ const changeEffects = () => {
   });
 };
 
-export { changeEffects, removeEffectClass, removeScaleFilter };
+export { changeEffects, removeEffectClass, resetScale };

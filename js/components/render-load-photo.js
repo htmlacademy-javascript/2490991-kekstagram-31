@@ -1,11 +1,12 @@
-import { isEscapeKey } from '../utils';
+import { onDocumentKeydown, onOverlayClick } from '../utils';
 import { SIZE_NUMS } from '../constants.js';
 import './prestine-validate.js';
 import {
   changeEffects,
   removeEffectClass,
-  removeScaleFilter,
+  resetScale,
 } from './render-scale.js';
+import { closeModal, setModal } from './modal-handler.js';
 
 const body = document.body;
 const imgUpload = body.querySelector('.img-upload');
@@ -15,42 +16,6 @@ const preview = overlay.querySelector('.img-upload__preview');
 const imgScale = overlay.querySelector('.img-upload__scale');
 const fildsetEffects = overlay.querySelector('.img-upload__effects');
 const image = preview.querySelector('img');
-
-const closeModal = () => {
-  const successNode = body.querySelector('.success');
-  const errorNode = body.querySelector('.error');
-  if (successNode) {
-    successNode.remove();
-    closePreviewPicture();
-  } else if (errorNode) {
-    errorNode.remove();
-  } else {
-    closePreviewPicture();
-  }
-};
-
-const onDocumentKeydown = (evt) => {
-  if (
-    isEscapeKey(evt) &&
-    !document.activeElement.parentElement.classList.contains(
-      'img-upload__field-wrapper'
-    )
-  ) {
-    evt.preventDefault();
-    closeModal();
-  }
-};
-
-const onOverlayClick = (evt) => {
-  if (
-    evt.target.classList.contains('img-upload__overlay') ||
-    evt.target.classList.contains('error') ||
-    evt.target.classList.contains('success')
-  ) {
-    evt.preventDefault();
-    closeModal();
-  }
-};
 
 const changeSize = (isDecrease) => {
   const controlInput = imgScale.querySelector('.scale__control--value');
@@ -65,21 +30,26 @@ const changeSize = (isDecrease) => {
   preview.style.setProperty('transform', `scale(${value / 100})`);
 };
 
-function closePreviewPicture() {
-  document.removeEventListener('keydown', onDocumentKeydown);
-  document.removeEventListener('click', onOverlayClick);
+const clearPreview = () => {
   body.querySelector('#upload-select-image').reset();
   overlay
     .querySelectorAll('.img-upload__field-wrapper--error')
     .forEach((el) => el.remove());
   preview.style.removeProperty('transform');
   removeEffectClass();
-  removeScaleFilter();
+  resetScale();
+};
+
+function closePreviewPicture() {
+  clearPreview();
+  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('click', onOverlayClick);
   body.classList.remove('modal-open');
   overlay.classList.add('hidden');
 }
 
 const openLoadFile = (evt) => {
+  setModal(imgUpload);
   const form = body.querySelector('.img-upload__form');
   form.setAttribute(
     'action',
@@ -103,7 +73,7 @@ fildsetEffects.addEventListener('change', () => {
 });
 
 reset.addEventListener('click', () => {
-  closePreviewPicture();
+  closeModal();
 });
 
 export { openLoadFile, closePreviewPicture };
