@@ -1,4 +1,4 @@
-import { closeModal, setModal } from './modal-handler.js';
+import { closeModal, setModal } from '../store/modal-handler.js';
 
 const body = document.body;
 

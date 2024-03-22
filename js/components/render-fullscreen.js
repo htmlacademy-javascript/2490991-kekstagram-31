@@ -1,6 +1,6 @@
 import { onDocumentKeydown, onOverlayClick } from '../utils.js';
 import { renderPhotoComments } from './render-comments.js';
-import { closeModal, setModal } from './modal-handler.js';
+import { closeModal, setModal } from '../store/modal-handler.js';
 
 const body = document.body;
 const bigPictureModal = body.querySelector('.big-picture');

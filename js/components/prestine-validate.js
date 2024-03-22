@@ -1,5 +1,5 @@
 import { TEXT_NUMS } from '../constants.js';
-import { sendData } from './fetch-api.js';
+import { sendData } from '../store/fetch-api.js';
 import { showSuccesMessage, showErrorMessage } from './render-load-result.js';
 import '../../vendor/pristine/pristine.min.js';
 

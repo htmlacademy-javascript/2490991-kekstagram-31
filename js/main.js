@@ -1,6 +1,6 @@
 import { renderPhoto } from './components/render-miniatures.js';
 import { openLoadFile } from './components/render-load-photo.js';
-import { getData } from './components/fetch-api.js';
+import { getData } from './store/fetch-api.js';
 import { ALERT_SHOW_TIME } from './constants.js';
 
 const body = document.body;

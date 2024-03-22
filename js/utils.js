@@ -1,4 +1,4 @@
-import { closeModal } from './components/modal-handler.js';
+import { closeModal } from './store/modal-handler.js';
 
 const getRandomInt = (min, max) =>
   Math.round(Math.random() * (max - min) + min);
