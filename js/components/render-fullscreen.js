@@ -34,6 +34,7 @@ function closeBigPicture() {
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   bigPictureModal.removeEventListener('click', onOverlayClick);
+  moreCommentsButton.replaceWith(moreCommentsButton.cloneNode(true));
 }
 
 cancel.addEventListener('click', () => {

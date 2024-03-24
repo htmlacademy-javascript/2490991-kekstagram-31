@@ -15,6 +15,7 @@ const reset = imgUpload.querySelector('.img-upload__cancel');
 const preview = overlay.querySelector('.img-upload__preview');
 const imgScale = overlay.querySelector('.img-upload__scale');
 const fildsetEffects = overlay.querySelector('.img-upload__effects');
+const listEffects = overlay.querySelectorAll('.effects__preview');
 const image = preview.querySelector('img');
 
 const changeSize = (isDecrease) => {
@@ -36,8 +37,18 @@ const clearPreview = () => {
     .querySelectorAll('.img-upload__field-wrapper--error')
     .forEach((el) => el.remove());
   preview.style.removeProperty('transform');
+  listEffects.forEach((item) => {
+    item.style.removeProperty('background-image');
+  });
   removeEffectClass();
   resetScale();
+};
+
+const setNewImage = (imgFile) => {
+  image.src = imgFile;
+  listEffects.forEach((item) => {
+    item.style.setProperty('background-image', `url("${imgFile}")`);
+  });
 };
 
 function closePreviewPicture() {
@@ -57,7 +68,7 @@ const openLoadFile = (evt) => {
   );
   form.setAttribute('method', 'POST');
   form.setAttribute('enctype', 'multipart/form-data');
-  image.src = URL.createObjectURL(evt.target.files[0]);
+  setNewImage(URL.createObjectURL(evt.target.files[0]));
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
