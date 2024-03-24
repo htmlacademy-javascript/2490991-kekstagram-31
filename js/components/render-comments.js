@@ -4,7 +4,7 @@ const addComment = ({ avatar, name, message }, template) => {
   const newComment = template.cloneNode(true);
   newComment.querySelector('img').src = avatar;
   newComment.querySelector('img').alt = name;
-  newComment.querySelector('p').textContent = message.join(' ');
+  newComment.querySelector('p').textContent = message;
   return newComment;
 };
 

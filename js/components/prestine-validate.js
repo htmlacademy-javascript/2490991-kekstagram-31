@@ -1,7 +1,11 @@
 import { TEXT_NUMS } from '../constants.js';
+import { sendData } from '../store/fetch-api.js';
+import { showSuccesMessage, showErrorMessage } from './render-load-result.js';
 import '../../vendor/pristine/pristine.min.js';
 
-const overlay = document.querySelector('.img-upload__overlay');
+const body = document.body;
+const uploadForm = body.querySelector('.img-upload__form');
+const overlay = uploadForm.querySelector('.img-upload__overlay');
 const imgText = overlay.querySelector('.img-upload__text');
 const sendButton = overlay.querySelector('#upload-submit');
 const textHashTags = imgText.querySelector('.text__hashtags');
@@ -63,8 +67,15 @@ pristine.addValidator(
   'длина комментария больше 140 символов'
 );
 
-sendButton.addEventListener('click', (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  if (pristine.validate()) {
+    sendButton.disabled = true;
+    sendData(new FormData(evt.target))
+      .then(showSuccesMessage)
+      .catch(showErrorMessage)
+      .finally(() => {
+        sendButton.disabled = false;
+      });
   }
 });

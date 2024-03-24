@@ -1,25 +1,12 @@
-import { isEscapeKey } from '../utils.js';
+import { onDocumentKeydown, onOverlayClick } from '../utils.js';
 import { renderPhotoComments } from './render-comments.js';
+import { closeModal, setModal } from '../store/modal-handler.js';
 
 const body = document.body;
 const bigPictureModal = body.querySelector('.big-picture');
 const cancel = bigPictureModal.querySelector('.big-picture__cancel');
 const bigPictureImg = bigPictureModal.querySelector('.big-picture__img');
 const moreCommentsButton = bigPictureModal.querySelector('.comments-loader');
-
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeBigPicture();
-  }
-};
-
-const onOverlayClick = (evt) => {
-  if (evt.target.classList.contains('overlay')) {
-    evt.preventDefault();
-    closeBigPicture();
-  }
-};
 
 const openBigPicture = () => {
   document.addEventListener('keydown', onDocumentKeydown);
@@ -29,6 +16,7 @@ const openBigPicture = () => {
 };
 
 function openFullScreenModal({ url, description, likes, comments }) {
+  setModal(bigPictureModal);
   bigPictureImg.querySelector('img').src = url;
   bigPictureModal.querySelector('.social__caption').textContent = description;
   bigPictureModal.querySelector('.likes-count').textContent = likes;
@@ -46,10 +34,11 @@ function closeBigPicture() {
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   bigPictureModal.removeEventListener('click', onOverlayClick);
+  moreCommentsButton.replaceWith(moreCommentsButton.cloneNode(true));
 }
 
 cancel.addEventListener('click', () => {
-  closeBigPicture();
+  closeModal();
 });
 
-export { openFullScreenModal };
+export { openFullScreenModal, closeBigPicture };
