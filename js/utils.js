@@ -47,9 +47,29 @@ const onOverlayClick = (evt) => {
   }
 };
 
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = getRandomInt(0, i + 1);
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+};
+
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
 export {
   getRandomInt,
   createRandomIdGenerator,
   onDocumentKeydown,
   onOverlayClick,
+  shuffle,
+  debounce,
 };
