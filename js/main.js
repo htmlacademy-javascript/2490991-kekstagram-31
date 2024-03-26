@@ -1,7 +1,7 @@
 import { renderPhoto } from './components/render-miniatures.js';
 import { openLoadFile } from './components/render-load-photo.js';
 import { getData } from './store/fetch-api.js';
-import { ALERT_SHOW_TIME } from './constants.js';
+import { ALERT_SHOW_TIME, FILE_TYPES } from './constants.js';
 import { debounce } from './utils.js';
 import { setFilterClick } from './store/filter-photo.js';
 
@@ -32,5 +32,12 @@ getData()
   });
 
 loadFileButton.addEventListener('change', (evt) => {
-  openLoadFile(evt);
+  const file = evt.target.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    openLoadFile(file);
+  }
 });

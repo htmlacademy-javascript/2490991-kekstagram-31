@@ -28,7 +28,7 @@ const changeSize = (isDecrease) => {
   }
 
   controlInput.value = `${value}%`;
-  preview.style.setProperty('transform', `scale(${value / 100})`);
+  image.style.setProperty('transform', `scale(${value / 100})`);
 };
 
 const clearPreview = () => {
@@ -36,7 +36,7 @@ const clearPreview = () => {
   overlay
     .querySelectorAll('.img-upload__field-wrapper--error')
     .forEach((el) => el.remove());
-  preview.style.removeProperty('transform');
+  image.style.removeProperty('transform');
   listEffects.forEach((item) => {
     item.style.removeProperty('background-image');
   });
@@ -59,7 +59,7 @@ function closePreviewPicture() {
   overlay.classList.add('hidden');
 }
 
-const openLoadFile = (evt) => {
+const openLoadFile = (file) => {
   setModal(imgUpload);
   const form = body.querySelector('.img-upload__form');
   form.setAttribute(
@@ -68,7 +68,7 @@ const openLoadFile = (evt) => {
   );
   form.setAttribute('method', 'POST');
   form.setAttribute('enctype', 'multipart/form-data');
-  setNewImage(URL.createObjectURL(evt.target.files[0]));
+  setNewImage(URL.createObjectURL(file));
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
