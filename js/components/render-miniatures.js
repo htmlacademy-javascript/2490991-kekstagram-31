@@ -1,38 +1,15 @@
 import { openFullScreenModal } from './render-fullscreen.js';
-import { shuffle } from '../utils.js';
+import { transformArray } from '../utils.js';
 
 const body = document.body;
 const pictures = body.querySelector('.pictures');
 const template = body.querySelector('#picture').content;
 const newPictureTemplate = template.querySelector('.picture');
 const photoListFragment = document.createDocumentFragment();
-const imgFilter = body.querySelector('.img-filters');
-const imgFilterFrom = imgFilter.querySelector('.img-filters__form');
 
 const clearPictureList = () => {
   const pictureNodes = pictures.querySelectorAll('.picture');
   pictureNodes.forEach((item) => item.remove());
-};
-
-const sortPhotos = (photoA, photoB) =>
-  photoB.comments.length - photoA.comments.length;
-
-const transformArray = (photos) => {
-  const activeButton = imgFilterFrom.querySelector(
-    '.img-filters__button--active'
-  );
-  const buttonFilterId = activeButton.getAttribute('id');
-
-  switch (buttonFilterId) {
-    case 'filter-random': {
-      return shuffle(photos).slice(0, 10);
-    }
-    case 'filter-discussed': {
-      return photos.sort(sortPhotos);
-    }
-    default:
-      return photos;
-  }
 };
 
 const renderPhoto = (photos) => {

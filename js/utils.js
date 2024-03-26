@@ -65,6 +65,29 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
+const transformArray = (photos) => {
+  const imgFilter = document.querySelector('.img-filters');
+  const imgFilterFrom = imgFilter.querySelector('.img-filters__form');
+
+  const activeButton = imgFilterFrom.querySelector(
+    '.img-filters__button--active'
+  );
+  const buttonFilterId = activeButton.getAttribute('id');
+
+  switch (buttonFilterId) {
+    case 'filter-random': {
+      return shuffle(photos).slice(0, 10);
+    }
+    case 'filter-discussed': {
+      return photos.sort(
+        (photoA, photoB) => photoB.comments.length - photoA.comments.length
+      );
+    }
+    default:
+      return photos;
+  }
+};
+
 export {
   getRandomInt,
   createRandomIdGenerator,
@@ -72,4 +95,5 @@ export {
   onOverlayClick,
   shuffle,
   debounce,
+  transformArray,
 };
