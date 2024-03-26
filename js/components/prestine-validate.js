@@ -26,14 +26,14 @@ const validateHashTag = (value) => {
   const hashTagRegexp = /^#[a-zа-яё0-9]{1,20}$/i;
   let notMatches = [];
   if (value !== '') {
-    const hashTags = value.split(' ');
+    const hashTags = value.split(' ').filter((tag) => tag.trim().length);
     notMatches = hashTags.filter((element) => !hashTagRegexp.test(element));
   }
   return notMatches.length === 0;
 };
 
 const checkUniqueHashTag = (hashTagValue) => {
-  const hashTags = hashTagValue.split(' ');
+  const hashTags = hashTagValue.split(' ').filter((tag) => tag.trim().length);
   const uniqueHashTags = hashTags.filter(
     (value, index, array) =>
       array.findIndex((el) => el.toLowerCase() === value.toLowerCase()) ===
@@ -44,7 +44,7 @@ const checkUniqueHashTag = (hashTagValue) => {
 };
 
 const checkQtyHashTags = (value) => {
-  const hashTags = value.split(' ');
+  const hashTags = value.split(' ').filter((tag) => tag.trim().length);
   return hashTags.length <= TEXT_NUMS.hashtagMax;
 };
 
@@ -69,7 +69,8 @@ pristine.addValidator(
 
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  if (pristine.validate()) {
+  const isValid = pristine.validate();
+  if (isValid) {
     sendButton.disabled = true;
     sendData(new FormData(evt.target))
       .then(showSuccesMessage)

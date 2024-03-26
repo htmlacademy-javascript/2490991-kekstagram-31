@@ -6,7 +6,6 @@ const body = document.body;
 const bigPictureModal = body.querySelector('.big-picture');
 const cancel = bigPictureModal.querySelector('.big-picture__cancel');
 const bigPictureImg = bigPictureModal.querySelector('.big-picture__img');
-const moreCommentsButton = bigPictureModal.querySelector('.comments-loader');
 
 const openBigPicture = () => {
   document.addEventListener('keydown', onDocumentKeydown);
@@ -30,10 +29,11 @@ function openFullScreenModal({ url, description, likes, comments }) {
 
 function closeBigPicture() {
   bigPictureModal.classList.add('hidden');
-  moreCommentsButton.classList.remove('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   bigPictureModal.removeEventListener('click', onOverlayClick);
+  const moreCommentsButton = bigPictureModal.querySelector('.comments-loader');
+  moreCommentsButton.classList.remove('hidden');
   moreCommentsButton.replaceWith(moreCommentsButton.cloneNode(true));
 }
 

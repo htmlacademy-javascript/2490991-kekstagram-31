@@ -15,8 +15,8 @@ const setFilterClick = (cb) => {
   imgFilter.classList.remove('img-filters--inactive');
   imgFilterFrom.addEventListener('click', (evt) => {
     const buttonId = evt.target.getAttribute('id');
-    changeActiveButton(buttonId);
     cb();
+    changeActiveButton(buttonId);
   });
 };
 

@@ -1,8 +1,21 @@
 import { closeModal, setModal } from '../store/modal-handler.js';
+import { onDocumentKeydown, onOverlayClick } from '../utils';
 
 const body = document.body;
 
+const setListeners = () => {
+  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('click', onOverlayClick);
+};
+
+export const removeListeners = () => {
+  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('click', onOverlayClick);
+};
+
 export const showSuccesMessage = () => {
+  closeModal();
+  setListeners();
   const successTemplate = body.querySelector('#success').content;
   const successMessage = successTemplate
     .querySelector('.success')
