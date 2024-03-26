@@ -53,18 +53,18 @@ const checkDescriptionLength = (value) => value.length <= TEXT_NUMS.textMax;
 pristine.addValidator(
   textHashTags,
   validateHashTag,
-  'введён невалидный хэштег'
+  'Введён невалидный хэштег'
 );
 pristine.addValidator(
   textHashTags,
   checkUniqueHashTag,
   'Хэштеги должны быть уникальными'
 );
-pristine.addValidator(textHashTags, checkQtyHashTags, 'хэштеги повторяются');
+pristine.addValidator(textHashTags, checkQtyHashTags, 'Хэштеги повторяются');
 pristine.addValidator(
   textDescription,
   checkDescriptionLength,
-  'длина комментария больше 140 символов'
+  'Длина комментария больше 140 символов'
 );
 
 uploadForm.addEventListener('submit', (evt) => {

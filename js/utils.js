@@ -47,9 +47,53 @@ const onOverlayClick = (evt) => {
   }
 };
 
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = getRandomInt(0, i + 1);
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+};
+
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+const transformArray = (photos) => {
+  const imgFilter = document.querySelector('.img-filters');
+  const imgFilterFrom = imgFilter.querySelector('.img-filters__form');
+
+  const activeButton = imgFilterFrom.querySelector(
+    '.img-filters__button--active'
+  );
+  const buttonFilterId = activeButton.getAttribute('id');
+
+  switch (buttonFilterId) {
+    case 'filter-random': {
+      return shuffle(photos).slice(0, 10);
+    }
+    case 'filter-discussed': {
+      return photos.sort(
+        (photoA, photoB) => photoB.comments.length - photoA.comments.length
+      );
+    }
+    default:
+      return photos;
+  }
+};
+
 export {
   getRandomInt,
   createRandomIdGenerator,
   onDocumentKeydown,
   onOverlayClick,
+  shuffle,
+  debounce,
+  transformArray,
 };
