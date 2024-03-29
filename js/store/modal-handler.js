@@ -1,5 +1,6 @@
 import { closeBigPicture } from '../components/render-fullscreen';
 import { closePreviewPicture } from '../components/render-load-photo';
+import { removeListeners } from '../components/render-load-result';
 
 const MODAL_STACK = [];
 const body = document.body;
@@ -13,7 +14,7 @@ const closeModal = () => {
     case 'success': {
       const successNode = body.querySelector('.success');
       successNode.remove();
-      closePreviewPicture();
+      removeListeners();
       break;
     }
     case 'error': {
