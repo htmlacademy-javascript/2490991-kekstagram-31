@@ -2,13 +2,13 @@ import { closeBigPicture } from '../components/render-fullscreen';
 import { closePreviewPicture } from '../components/render-load-photo';
 import { removeListeners } from '../components/render-load-result';
 
-const MODAL_STACK = [];
+const MODAL_STACKS = [];
 const body = document.body;
 
-const setModal = (modal) => MODAL_STACK.push(modal.classList[0]);
+const setModal = (modal) => MODAL_STACKS.push(modal.classList[0]);
 
 const closeModal = () => {
-  const modalClass = MODAL_STACK.pop();
+  const modalClass = MODAL_STACKS.pop();
 
   switch (modalClass) {
     case 'success': {

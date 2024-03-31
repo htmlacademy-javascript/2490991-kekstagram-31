@@ -1,13 +1,5 @@
 import '../../vendor/nouislider/nouislider.js';
 
-const overlay = document.querySelector('.img-upload__overlay');
-const fildsetEffects = overlay.querySelector('.img-upload__effects');
-const preview = overlay.querySelector('.img-upload__preview');
-const effectLevel = overlay.querySelector('.img-upload__effect-level');
-const levelValue = effectLevel.querySelector('.effect-level__value');
-const sliderEffectLevel = overlay.querySelector('.effect-level__slider');
-const image = preview.querySelector('img');
-
 const SCALE_PHOTO = {
   chrome: ['effects__preview--chrome', 0, 1, 0.1],
   sepia: ['effects__preview--sepia', 0, 1, 0.1],
@@ -16,6 +8,14 @@ const SCALE_PHOTO = {
   heat: ['effects__preview--heat', 1, 3, 0.1],
   none: ['effects__preview--none', 0, 0, 0],
 };
+
+const overlay = document.querySelector('.img-upload__overlay');
+const fildsetEffects = overlay.querySelector('.img-upload__effects');
+const preview = overlay.querySelector('.img-upload__preview');
+const effectLevel = overlay.querySelector('.img-upload__effect-level');
+const levelValue = effectLevel.querySelector('.effect-level__value');
+const sliderEffectLevel = overlay.querySelector('.effect-level__slider');
+const image = preview.querySelector('img');
 
 let effectValue;
 
@@ -42,7 +42,7 @@ noUiSlider.create(sliderEffectLevel, {
 
 const removeEffectClass = () => {
   const effectClass = Object.values(SCALE_PHOTO).map((item) => item[0]);
-  effectClass.forEach((el) => image.classList.remove(el));
+  effectClass.forEach((element) => image.classList.remove(element));
 };
 
 const resetEffect = () => {

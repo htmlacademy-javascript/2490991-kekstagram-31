@@ -35,7 +35,7 @@ const clearPreview = () => {
   body.querySelector('#upload-select-image').reset();
   overlay
     .querySelectorAll('.img-upload__field-wrapper--error')
-    .forEach((el) => el.remove());
+    .forEach((element) => element.remove());
   image.style.removeProperty('transform');
   listEffects.forEach((item) => {
     item.style.removeProperty('background-image');

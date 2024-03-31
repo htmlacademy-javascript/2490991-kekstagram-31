@@ -36,7 +36,7 @@ const renderPhoto = (photos) => {
     if (evt.target.classList.contains('picture__img')) {
       evt.preventDefault();
       const index = photos.findIndex(
-        (el) => el.id === Number(evt.target.dataset.photoId)
+        (element) => element.id === Number(evt.target.dataset.photoId)
       );
       openFullScreenModal(photos[index]);
     }
