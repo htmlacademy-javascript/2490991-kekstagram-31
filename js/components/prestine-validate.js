@@ -35,9 +35,10 @@ const validateHashTag = (value) => {
 const checkUniqueHashTag = (hashTagValue) => {
   const hashTags = hashTagValue.split(' ').filter((tag) => tag.trim().length);
   const uniqueHashTags = hashTags.filter(
-    (value, index, array) =>
-      array.findIndex((el) => el.toLowerCase() === value.toLowerCase()) ===
-      index
+    (value, index, arrays) =>
+      arrays.findIndex(
+        (element) => element.toLowerCase() === value.toLowerCase()
+      ) === index
   );
 
   return hashTags.length === uniqueHashTags.length;

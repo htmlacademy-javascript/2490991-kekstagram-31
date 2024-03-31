@@ -23,14 +23,14 @@ isPalindrome('Лёша на полке клопа нашёл ');
 
 function getNumber(string) {
   const newString = !Number.isNaN(string * 10) ? string.toString() : string;
-  let num = '';
+  let stringNumber = '';
   for (let i = 0; i < newString.length; i++) {
-    if (!Number.isNaN(newString[i] * 10)){
-      num += newString[i].trim();
+    if (!Number.isNaN(newString[i] * 10)) {
+      stringNumber += newString[i].trim();
     }
   }
 
-  return parseInt(num, 10);
+  return parseInt(stringNumber, 10);
 }
 
 getNumber('2023 год');
@@ -41,7 +41,6 @@ getNumber('а я томат');
 getNumber(2023);
 getNumber(-1);
 getNumber(1.5);
-
 
 const checkMeetingTime = (startTime, endTime, meetingTime, duration) => {
   function getDate(time, durationMinute) {
@@ -61,10 +60,7 @@ const checkMeetingTime = (startTime, endTime, meetingTime, duration) => {
   const endDate = getDate(endTime);
   const startMeetingDate = getDate(meetingTime);
   const endMeetingDate = getDate(meetingTime, duration);
-  return (
-    startDate <= startMeetingDate &&
-    endMeetingDate <= endDate
-  );
+  return startDate <= startMeetingDate && endMeetingDate <= endDate;
 };
 
 checkMeetingTime('08:00', '17:30', '14:00', 90); // true
